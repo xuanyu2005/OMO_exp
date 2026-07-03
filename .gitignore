@@ -1,0 +1,25 @@
+# Secrets and local credentials
+.env
+.env.*
+!.env.example
+assignment_orchestration.md
+
+# Experiment outputs that may contain model transcripts or keys
+experiments/results/raw/
+experiments/results/runs/
+*.log
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python / Node local artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+node_modules/
+dist/
+build/
+
