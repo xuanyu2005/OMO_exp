@@ -1,0 +1,50 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
+  "categories": {
+    "quick": {
+      "model": "formal-claude-compat-proxy/claude-sonnet-4-6"
+    },
+    "unspecified-low": {
+      "model": "formal-claude-compat-proxy/claude-sonnet-4-6"
+    },
+    "unspecified-high": {
+      "model": "formal-claude-compat-proxy/claude-sonnet-4-6"
+    },
+    "deep": {
+      "model": "formal-claude-compat-proxy/claude-sonnet-4-6"
+    },
+    "ultrabrain": {
+      "model": "formal-claude-compat-proxy/claude-sonnet-4-6"
+    }
+  },
+  "agents": {
+    "sisyphus": {
+      "model": "formal-claude-compat-proxy/claude-sonnet-4-6"
+    },
+    "hephaestus": {
+      "model": "formal-claude-compat-proxy/claude-sonnet-4-6",
+      "allow_non_gpt_model": true
+    },
+    "prometheus": {
+      "model": "formal-claude-compat-proxy/claude-sonnet-4-6"
+    },
+    "metis": {
+      "model": "formal-claude-compat-proxy/claude-sonnet-4-6"
+    },
+    "atlas": {
+      "model": "formal-claude-compat-proxy/claude-sonnet-4-6"
+    },
+    "momus": {
+      "model": "formal-claude-compat-proxy/claude-sonnet-4-6"
+    },
+    "librarian": {
+      "model": "formal-claude-compat-proxy/claude-sonnet-4-6"
+    },
+    "explore": {
+      "model": "formal-claude-compat-proxy/claude-sonnet-4-6"
+    },
+    "sisyphus-junior": {
+      "model": "formal-claude-compat-proxy/claude-sonnet-4-6"
+    }
+  }
+}

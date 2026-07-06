@@ -1,0 +1,7 @@
+{
+  "gpt-5.4": {
+    "base_url_env": "GPT_BASE_URL",
+    "api_key_env": "GPT_API_KEY",
+    "upstream_model": "gpt-5.4"
+  }
+}

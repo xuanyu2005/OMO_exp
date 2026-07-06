@@ -1,0 +1,24 @@
+diff --git a/packages/omo-opencode/src/tools/delegate-task/tool-argument-preparation.ts b/packages/omo-opencode/src/tools/delegate-task/tool-argument-preparation.ts
+index 3be268d65..819cff506 100644
+--- a/packages/omo-opencode/src/tools/delegate-task/tool-argument-preparation.ts
++++ b/packages/omo-opencode/src/tools/delegate-task/tool-argument-preparation.ts
+@@ -81,9 +81,18 @@ export async function prepareDelegateTaskArgs(args: Record<string, unknown>, ctx
+     ? loadSkills.filter((value): value is string => typeof value === "string")
+     : []
+ 
+-  const taskID = typeof args.task_id === "string" ? args.task_id : undefined
++  let taskID = typeof args.task_id === "string" ? args.task_id : undefined
+   const command = typeof args.command === "string" ? args.command : undefined
+ 
++  if (taskID && (category || originalSubagentType)) {
++    log("[task] task_id provided with new delegation target; ignoring task_id", {
++      task_id: taskID,
++      category,
++      subagent_type: originalSubagentType,
++    })
++    taskID = undefined
++  }
++
+ 
+   return {
+     category,

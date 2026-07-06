@@ -1,0 +1,71 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
+  "categories": {
+    "quick": {
+      "model": "formal-claude-anthropic/claude-sonnet-4-6"
+    },
+    "unspecified-low": {
+      "model": "formal-claude-anthropic/claude-sonnet-4-6"
+    },
+    "unspecified-high": {
+      "model": "formal-gpt-compat-proxy/gpt-5.4",
+      "fallback_models": [
+        "formal-claude-anthropic/claude-sonnet-4-6"
+      ]
+    },
+    "deep": {
+      "model": "formal-gpt-compat-proxy/gpt-5.4",
+      "fallback_models": [
+        "formal-claude-anthropic/claude-sonnet-4-6"
+      ]
+    },
+    "ultrabrain": {
+      "model": "formal-gpt-compat-proxy/gpt-5.4",
+      "fallback_models": [
+        "formal-claude-anthropic/claude-sonnet-4-6"
+      ]
+    }
+  },
+  "agents": {
+    "sisyphus": {
+      "model": "formal-claude-anthropic/claude-sonnet-4-6",
+      "fallback_models": [
+        "formal-gpt-compat-proxy/gpt-5.4"
+      ]
+    },
+    "hephaestus": {
+      "model": "formal-claude-anthropic/claude-sonnet-4-6",
+      "allow_non_gpt_model": true,
+      "fallback_models": [
+        "formal-gpt-compat-proxy/gpt-5.4"
+      ]
+    },
+    "prometheus": {
+      "model": "formal-gpt-compat-proxy/gpt-5.4",
+      "fallback_models": [
+        "formal-claude-anthropic/claude-sonnet-4-6"
+      ]
+    },
+    "metis": {
+      "model": "formal-gpt-compat-proxy/gpt-5.4",
+      "fallback_models": [
+        "formal-claude-anthropic/claude-sonnet-4-6"
+      ]
+    },
+    "atlas": {
+      "model": "formal-claude-anthropic/claude-sonnet-4-6"
+    },
+    "momus": {
+      "model": "formal-claude-anthropic/claude-sonnet-4-6"
+    },
+    "librarian": {
+      "model": "formal-claude-anthropic/claude-sonnet-4-6"
+    },
+    "explore": {
+      "model": "formal-claude-anthropic/claude-sonnet-4-6"
+    },
+    "sisyphus-junior": {
+      "model": "formal-claude-anthropic/claude-sonnet-4-6"
+    }
+  }
+}

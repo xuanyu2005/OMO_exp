@@ -1,0 +1,32 @@
+{
+  "gpt-5.4": {
+    "input": 2.5,
+    "cached_input": 0.25,
+    "output": 15.0
+  },
+  "gpt-5.4-mini": {
+    "input": 0.15,
+    "cached_input": 0.015,
+    "output": 0.6
+  },
+  "claude-sonnet-4-6": {
+    "input": 3.0,
+    "cached_input": 0.3,
+    "output": 15.0
+  },
+  "formal-gpt-compat-proxy/gpt-5.4": {
+    "input": 2.5,
+    "cached_input": 0.25,
+    "output": 15.0
+  },
+  "formal-gpt-compat-proxy/gpt-5.4-mini": {
+    "input": 0.15,
+    "cached_input": 0.015,
+    "output": 0.6
+  },
+  "formal-gpt-compat-proxy/claude-sonnet-4-6": {
+    "input": 3.0,
+    "cached_input": 0.3,
+    "output": 15.0
+  }
+}

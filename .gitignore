@@ -4,9 +4,32 @@
 !.env.example
 assignment_orchestration.md
 
+# SiliconFlow-only debug assets should stay local
+.env.siliconflow.example
+docs/siliconflow_debug_stage.md
+experiments/configs/debug-siliconflow/
+experiments/results/*siliconflow*
+experiments/results/api_metrics/*siliconflow*
+experiments/results/runs/*siliconflow*
+
 # Experiment outputs that may contain model transcripts or keys
 experiments/results/raw/
 experiments/results/runs/
+experiments/results/predictions/
+experiments/results/reports/
+experiments/results/api_metrics/
+experiments/results/batch_runs/
+experiments/workspaces/
+.omo/run-continuation/
+.opencode/
+.codegraph/
+logs/
+evaluation_results/
+*.verified-mini-*.json
+formal-*.json
+siliconflow-*.json
+debug-*.json
+experiments/results/*.jsonl
 *.log
 
 # OS / editor noise
@@ -16,6 +39,8 @@ Thumbs.db
 .idea/
 
 # Python / Node local artifacts
+.venv/
+.venv-wsl/
 __pycache__/
 *.py[cod]
 .pytest_cache/
@@ -23,3 +48,6 @@ node_modules/
 dist/
 build/
 
+# Local experiment caches and large cloned worktrees
+experiments/repos/
+experiments/results/opencode_debug_calls/

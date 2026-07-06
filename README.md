@@ -1,69 +1,70 @@
-# Oh-My-OpenAgent Orchestration Experiment
+# OMO Exp
 
-本仓库用于提交“调研 Oh-My-OpenAgent 的 agent orchestration 机制，并设计小型实验验证其是否带来真实提升”的课程作业。
+本仓库用于复现和记录 OpenCode + Oh-My-OpenAgent（OMO）在 SWE-bench Verified Mini 上的对照实验。
+
+## 研究问题
+
+1. 在同一模型下，带 OMO 插件是否比不带 OMO 插件更好？
+2. 在带 OMO 插件时，所有角色配置单一模型是否比多模型角色分工更差？
+
+## 实验组
+
+| 组别 | 说明 |
+| --- | --- |
+| Baseline | 不启用 OMO，单模型直接修复 SWE-bench issue |
+| OMO Single | 启用 OMO，但所有 agent/category 绑定同一模型 |
+| OMO Multi | 启用 OMO，并按 parent/executor/reviewer/deep 等角色配置不同模型 |
+
+当前报告重点比较 GPT-5.4 与 Claude Sonnet 4.6 两类正式 API 结果，并把 forced delegation、optional-on-uncertainty、post-patch-review 等 OMO multi 策略作为诊断实验单独分析。
 
 ## 仓库结构
 
 ```text
 .
 ├── docs/
-│   ├── assignment_redacted.md      # 脱敏后的作业要求
-│   └── report.md                   # 最终报告草稿
+│   ├── 实验记录.md                  # 实验过程记录
+│   ├── 实验分析.md                  # 主要结果与机制分析
+│   └── swebench_local_environment.md # 本地评测环境说明
 ├── experiments/
-│   ├── README.md                   # 实验设计说明
-│   ├── tasks/task_suite.md         # 小型任务集与评分标准
-│   ├── configs/                    # 三组对照配置模板
-│   └── results/                    # 结果记录模板
-├── scripts/
-│   └── summarize_results.py        # 汇总评分表的小脚本
-├── oh-my-openagent/                # 上游项目源码，作为 Git submodule
-└── .env.example                    # API 环境变量模板，不含密钥
+│   ├── configs/                     # 正式 API / OMO 配置
+│   └── data/swe-bench-verified-mini/ # 选题清单与小型数据集元信息
+├── patches/
+│   └── omo-task-id-continuation-fix.patch
+├── scripts/                         # runner、proxy、metrics、summary 脚本
+└── oh-my-openagent/                 # 上游 OMO 子模块
 ```
 
-## 研究问题
+## 不纳入仓库的内容
 
-本作业验证两个问题：
+以下内容为本地运行缓存或调试资产，不提交到 GitHub：
 
-1. 带 Oh-My-OpenAgent orchestration 的 agent harness 是否优于不带 OMO 的单模型基线？
-2. 在带 OMO 的条件下，多模型角色分工是否优于所有 agent 都使用同一模型？
-
-## 对照组
-
-| 组别 | 说明 | 目标 |
-| --- | --- | --- |
-| A. Single Model Baseline | 不使用 OMO，仅使用单一模型完成任务 | 衡量普通单模型表现 |
-| B. OMO Single Model | 使用 OMO，但所有 agent/category 绑定同一模型 | 分离“编排机制”本身的收益 |
-| C. OMO Multi Model | 使用 OMO，并按 planner/executor/search/reviewer 配置不同模型 | 检验模型互补与角色路由收益 |
+- API 密钥与本地环境文件：`.env`、`.env.*`
+- 硅基流动调试配置、文档和指标
+- SWE-bench 大型运行工作区：`experiments/workspaces/`
+- 原始运行缓存、prediction、batch 临时目录、proxy 请求日志
+- Python 虚拟环境和缓存目录
 
 ## 快速开始
 
-1. 克隆本仓库时拉取上游子模块：
-
-```bash
-git clone --recurse-submodules <your-repo-url>
+```powershell
+uv sync
+uv run python scripts\check_swebench_env.py
 ```
 
-2. 本地配置 API key：
+复制 `.env.example` 并填入本地正式 API 环境变量后，可通过 `scripts/run_formal_swebench_case.py` 或 `scripts/run_formal_swebench_batch.py` 运行单题或批量实验。
 
-```bash
-cp .env.example .env
+## OMO 本地补丁
+
+实验中发现 OMO 在新建 delegated task 时，如果模型误填 `task_id`，原逻辑可能误判为 continuation，导致子任务卡住。本仓库在 `patches/omo-task-id-continuation-fix.patch` 中保留了该修复。
+
+如果使用未修复的 OMO 子模块，可在 `oh-my-openagent/` 下应用：
+
+```powershell
+git apply ..\patches\omo-task-id-continuation-fix.patch
 ```
 
-3. 按 `experiments/tasks/task_suite.md` 执行任务，并将结果填入：
+## 报告入口
 
-```text
-experiments/results/results_template.csv
-```
-
-4. 汇总结果：
-
-```bash
-python scripts/summarize_results.py experiments/results/results_template.csv
-```
-
-## 当前状态
-
-- 已建立 GitHub 提交仓库骨架。
-- 已将含有 API key 的原始作业文件加入 `.gitignore`，避免误提交。
-- 已提供报告、实验设计、配置和评分模板。
-
+- `docs/实验记录.md`：记录实验背景、配置、运行过程和结果表。
+- `docs/实验分析.md`：回答两个研究问题，并分析 OMO Single / OMO Multi 的收益边界。
+- `docs/swebench_local_environment.md`：记录本地 SWE-bench harness 环境。
